@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS rh_portfolio;
-CREATE DATABASE rh_portfolio;
