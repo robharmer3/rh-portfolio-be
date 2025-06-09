@@ -8,10 +8,10 @@ const seed = () => {
       return db.query(`DROP TABLE IF EXISTS projects`);
     })
     .then(() => {
-      return createProjects;
+      return createProjects();
     })
     .then(() => {
-      return createCategories;
+      return createCategories();
     });
 };
 module.exports = seed;
