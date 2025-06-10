@@ -8,6 +8,7 @@ const createProjects = () => {
         title VARCHAR,
         description VARCHAR,
         category VARCHAR,
+        link VARCHAR,
         avatar_url VARCHAR(1000))`
   );
 };
@@ -27,6 +28,7 @@ const insertProject = (projects) => {
       project.title,
       project.description,
       project.category,
+      project.link,
       project.avatar_url,
     ];
   });
@@ -34,7 +36,7 @@ const insertProject = (projects) => {
   return db.query(
     format(
       `INSERT INTO projects
-    (title, description, category, avatar_url)
+    (title, description, category, link, avatar_url)
     VALUES
     %L
     RETURNING *`,

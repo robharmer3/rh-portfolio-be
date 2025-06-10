@@ -3,7 +3,6 @@ module.exports = [
     title: "NC News",
     category: "Northcoder",
     description: "Final solo project",
-    link: "INSERT LINK HERE",
     avatar_url: "INSERT SCREENSHOT HERE",
   },
   {

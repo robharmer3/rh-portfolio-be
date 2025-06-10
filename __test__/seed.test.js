@@ -72,6 +72,19 @@ describe("Table Creation", () => {
           expect(column.data_type).toBe("character varying");
         });
     });
+    test("Link Column", () => {
+      return db
+        .query(
+          `SELECT * 
+        FROM information_schema.columns
+        WHERE table_name = 'projects'
+        AND column_name = 'link';`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe("link");
+          expect(column.data_type).toBe("character varying");
+        });
+    });
     test("Avatar Column", () => {
       return db
         .query(
@@ -145,12 +158,13 @@ describe("Table Creation", () => {
 describe("Data Insertion", () => {
   test("Project Data has been inserted correctly", () => {
     return db.query(`SELECT * FROM projects;`).then(({ rows: projects }) => {
-      expect(projects).toHaveLength(4);
+      expect(projects).toHaveLength(5);
       projects.forEach((project) => {
         expect(project).toHaveProperty("project_id");
         expect(project).toHaveProperty("title");
         expect(project).toHaveProperty("description");
         expect(project).toHaveProperty("category");
+        expect(project).toHaveProperty("link");
         expect(project).toHaveProperty("avatar_url");
       });
     });
