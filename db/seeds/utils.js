@@ -1,22 +1,68 @@
 const db = require("../connection");
+const format = require("pg-format");
 
 const createProjects = () => {
   return db.query(
     `CREATE TABLE projects
-        (project_id INT PRIMARY KEY,
+        (project_id SERIAL PRIMARY KEY,
         title VARCHAR,
         description VARCHAR,
-        category VARCHAR)`
+        category VARCHAR,
+        avatar_url VARCHAR(1000))`
   );
 };
 
 const createCategories = () => {
   return db.query(
     `CREATE TABLE categories 
-    (category_id INT PRIMARY KEY, 
+    (category_id SERIAL PRIMARY KEY, 
     title VARCHAR, 
     description VARCHAR)`
   );
 };
 
-module.exports = { createProjects, createCategories };
+const insertProject = (projects) => {
+  const formattedProjects = projects.map((project) => {
+    return [
+      project.title,
+      project.description,
+      project.category,
+      project.avatar_url,
+    ];
+  });
+
+  return db.query(
+    format(
+      `INSERT INTO projects
+    (title, description, category, avatar_url)
+    VALUES
+    %L
+    RETURNING *`,
+      formattedProjects
+    )
+  );
+};
+
+const insertCategories = (categories) => {
+  const formattedCategories = categories.map((category) => {
+    return [category.title, category.description];
+  });
+
+  return db.query(
+    format(
+      `INSERT INTO categories
+    (title, description)
+    VALUES
+    %L
+    RETURNING *`,
+      formattedCategories
+    )
+  );
+};
+
+module.exports = {
+  createProjects,
+  createCategories,
+  insertProject,
+  insertCategories,
+};
