@@ -47,7 +47,7 @@ const insertProject = (projects) => {
 
 const insertCategories = (categories) => {
   const formattedCategories = categories.map((category) => {
-    return [category.title, category.description];
+    return [category.name, category.description];
   });
 
   return db.query(

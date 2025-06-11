@@ -12,7 +12,8 @@
   "scripts": {
     "setup-dbs": "psql -f ./db/setup-dbs.sql",
     "test": "jest --runInBand",
-    "start": "node listen.js"
+    "start": "node listen.js",
+    "dev": "nodemon listen.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "homepage": "https://github.com/robharmer3/rh-portfolio-be#readme",
   "description": "",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10"
   }
 }
