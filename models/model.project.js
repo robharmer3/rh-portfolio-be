@@ -1,17 +1,17 @@
 const db = require("../db/connection");
 
-exports.fetchAllCategories = (request, response, next) => {
-  return db.query(`SELECT * FROM categories`).then(({ rows }) => {
+exports.fetchAllProjects = () => {
+  return db.query(`SELECT * FROM projects`).then(({ rows }) => {
     return rows;
   });
 };
 
-exports.fetchCategoryByID = (category_id) => {
+exports.fetchProjectByID = (project_id) => {
   return db
     .query(
-      `SELECT * FROM categories
-        WHERE category_id = $1`,
-      [category_id]
+      `SELECT * FROM projects
+        WHERE project_id = $1`,
+      [project_id]
     )
     .then(({ rows }) => {
       if (rows.length === 0) {

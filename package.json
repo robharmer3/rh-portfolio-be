@@ -8,12 +8,14 @@
   },
   "name": "rh-portfolio-be",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "listen.js",
   "scripts": {
     "setup-dbs": "psql -f ./db/setup-dbs.sql",
     "test": "jest --runInBand",
     "start": "node listen.js",
-    "dev": "nodemon listen.js"
+    "dev": "nodemon listen.js",
+    "seed-prod": "NODE_ENV=production npm run seed",
+    "seed": "node ./db/seeds/run-seed.js"
   },
   "repository": {
     "type": "git",
