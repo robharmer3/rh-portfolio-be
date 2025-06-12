@@ -20,10 +20,10 @@ const seed = () => {
       return createProjects();
     })
     .then(() => {
-      return insertProject(projectData);
+      return insertCategories(categoryData);
     })
     .then(() => {
-      return insertCategories(categoryData);
+      return insertProject(projectData);
     });
 };
 module.exports = seed;

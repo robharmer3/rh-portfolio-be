@@ -173,7 +173,7 @@ describe("Data Insertion", () => {
     return db
       .query(`SELECT * FROM categories;`)
       .then(({ rows: categories }) => {
-        expect(categories).toHaveLength(2);
+        expect(categories).toHaveLength(3);
         categories.forEach((category) => {
           expect(category).toHaveProperty("title");
           expect(category).toHaveProperty("description");
