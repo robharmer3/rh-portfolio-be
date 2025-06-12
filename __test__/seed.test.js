@@ -69,7 +69,7 @@ describe("Table Creation", () => {
         )
         .then(({ rows: [column] }) => {
           expect(column.column_name).toBe("category");
-          expect(column.data_type).toBe("character varying");
+          expect(column.data_type).toBe("integer");
         });
     });
     test("Link Column", () => {

@@ -9,15 +9,15 @@ const {
 
 const seed = () => {
   return db
-    .query(`DROP TABLE IF EXISTS categories`)
+    .query(`DROP TABLE IF EXISTS projects`)
     .then(() => {
-      return db.query(`DROP TABLE IF EXISTS projects`);
-    })
-    .then(() => {
-      return createProjects();
+      return db.query(`DROP TABLE IF EXISTS categories`);
     })
     .then(() => {
       return createCategories();
+    })
+    .then(() => {
+      return createProjects();
     })
     .then(() => {
       return insertProject(projectData);

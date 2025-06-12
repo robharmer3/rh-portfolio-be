@@ -7,7 +7,7 @@ const createProjects = () => {
         (project_id SERIAL PRIMARY KEY,
         title VARCHAR,
         description VARCHAR,
-        category VARCHAR,
+        category INT REFERENCES categories(category_id) ON DELETE CASCADE NOT NULL,
         link VARCHAR,
         avatar_url VARCHAR(1000))`
   );
