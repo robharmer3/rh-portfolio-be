@@ -106,7 +106,7 @@ describe("GET /api/projects", () => {
           body.projects.forEach((project) => {
             expect(project).toMatchObject({
               title: expect.any(String),
-              category: expect.any(String),
+              category: expect.any(Number),
               description: expect.any(String),
               link: expect.any(String),
               avatar_url: expect.any(String),
@@ -132,7 +132,7 @@ describe("GET /api/projects", () => {
           expect(body.project).toMatchObject({
             project_id: 2,
             title: "2Gather",
-            category: "Northcoder",
+            category: 1,
             description: "Final group project",
             link: "INSERT LINK HERE",
             avatar_url: "INSERT SCREENSHOT HERE",
