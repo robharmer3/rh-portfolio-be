@@ -153,6 +153,60 @@ describe("Table Creation", () => {
         });
     });
   });
+  describe("Skills Table", () => {
+    test("Exists", () => {
+      return db
+        .query(
+          `SELECT EXISTS (
+        SELECT FROM 
+            information_schema.tables
+        WHERE
+            table_name = 'skills');`
+        )
+        .then(({ rows: [{ exists }] }) => {
+          expect(exists).toBe(true);
+        });
+    });
+    test("ID Column", () => {
+      return db
+        .query(
+          `SELECT * 
+        FROM information_schema.columns
+        WHERE table_name = 'skills'
+        AND column_name = 'skill_id';`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe("skill_id");
+          expect(column.data_type).toBe("integer");
+        });
+    });
+    test("Title Column", () => {
+      return db
+        .query(
+          `SELECT * 
+        FROM information_schema.columns
+        WHERE table_name = 'skills'
+        AND column_name = 'title';`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe("title");
+          expect(column.data_type).toBe("character varying");
+        });
+    });
+    test("Description Column", () => {
+      return db
+        .query(
+          `SELECT * 
+        FROM information_schema.columns
+        WHERE table_name = 'skills'
+        AND column_name = 'category';`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe("category");
+          expect(column.data_type).toBe("character varying");
+        });
+    });
+  });
 });
 
 describe("Data Insertion", () => {
@@ -179,5 +233,14 @@ describe("Data Insertion", () => {
           expect(category).toHaveProperty("description");
         });
       });
+  });
+  test("Skills Data has been inserted correctly", () => {
+    return db.query(`SELECT * FROM skills;`).then(({ rows: skills }) => {
+      expect(skills).toHaveLength(27);
+      skills.forEach((skill) => {
+        expect(skill).toHaveProperty("title");
+        expect(skill).toHaveProperty("category");
+      });
+    });
   });
 });

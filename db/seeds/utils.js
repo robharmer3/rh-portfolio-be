@@ -22,6 +22,15 @@ const createCategories = () => {
   );
 };
 
+const createSkills = () => {
+  return db.query(
+    `CREATE TABLE skills 
+    (skill_id SERIAL PRIMARY KEY, 
+    title VARCHAR, 
+    category VARCHAR)`
+  );
+};
+
 const insertProject = (projects) => {
   const formattedProjects = projects.map((project) => {
     return [
@@ -62,9 +71,28 @@ const insertCategories = (categories) => {
   );
 };
 
+const insertSkills = (skills) => {
+  const formattedSkills = skills.map((skill) => {
+    return [skill.name, skill.category];
+  });
+
+  return db.query(
+    format(
+      `INSERT INTO skills
+    (title, category)
+    VALUES
+    %L
+    RETURNING *`,
+      formattedSkills
+    )
+  );
+};
+
 module.exports = {
   createProjects,
   createCategories,
+  createSkills,
   insertProject,
   insertCategories,
+  insertSkills,
 };

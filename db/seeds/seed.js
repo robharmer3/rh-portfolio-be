@@ -1,13 +1,14 @@
 const db = require("../connection");
-const { projectData, categoryData } = require("../data/test-data");
 const {
   createProjects,
   createCategories,
   insertProject,
   insertCategories,
+  createSkills,
+  insertSkills,
 } = require("./utils");
 
-const seed = () => {
+const seed = ({ categoryData, projectData, skillData }) => {
   return db
     .query(`DROP TABLE IF EXISTS projects`)
     .then(() => {
@@ -20,10 +21,16 @@ const seed = () => {
       return createProjects();
     })
     .then(() => {
+      return createSkills();
+    })
+    .then(() => {
       return insertCategories(categoryData);
     })
     .then(() => {
       return insertProject(projectData);
+    })
+    .then(() => {
+      return insertSkills(skillData);
     });
 };
 module.exports = seed;
