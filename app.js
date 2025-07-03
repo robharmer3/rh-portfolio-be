@@ -1,7 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const endpoints = require("./endpoints.json");
-const { apiRouter, categoriesRouter, projectRouter } = require("./routers");
+const {
+  apiRouter,
+  categoriesRouter,
+  projectRouter,
+  skillRouter,
+} = require("./routers");
 const {
   handleIncorrectPath,
   handleCustomError,
@@ -17,6 +22,7 @@ app.use(express.json());
 app.use("/api", apiRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/projects", projectRouter);
+app.use("/api/skills", skillRouter);
 
 apiRouter.route("/").get((request, response) => {
   response.status(200).send({ endpoints });

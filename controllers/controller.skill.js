@@ -1,0 +1,12 @@
+const { fetchAllSkills } = require("../models/model.skill");
+
+exports.getAllSkills = (request, response, next) => {
+  fetchAllSkills()
+    .then((skills) => {
+      console.log(skills);
+      response.status(200).send({ skills });
+    })
+    .catch((error) => {
+      next(error);
+    });
+};

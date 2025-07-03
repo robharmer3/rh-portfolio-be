@@ -1,7 +1,7 @@
 const db = require("../db/connection");
 
 exports.fetchAllCategories = (request, response, next) => {
-  return db.query(`SELECT * FROM categories`).then(({ rows }) => {
+  return db.query(`SELECT * FROM project_categories`).then(({ rows }) => {
     return rows;
   });
 };
@@ -9,8 +9,8 @@ exports.fetchAllCategories = (request, response, next) => {
 exports.fetchCategoryByID = (category_id) => {
   return db
     .query(
-      `SELECT * FROM categories
-        WHERE category_id = $1`,
+      `SELECT * FROM project_categories
+        WHERE project_category_id = $1`,
       [category_id]
     )
     .then(({ rows }) => {

@@ -7,16 +7,16 @@ const createProjects = () => {
         (project_id SERIAL PRIMARY KEY,
         title VARCHAR,
         description VARCHAR,
-        category INT REFERENCES categories(category_id) ON DELETE CASCADE NOT NULL,
+        category INT REFERENCES project_categories(project_category_id) ON DELETE CASCADE NOT NULL,
         link VARCHAR,
         avatar_url VARCHAR(1000))`
   );
 };
 
-const createCategories = () => {
+const createProjectCategories = () => {
   return db.query(
-    `CREATE TABLE categories 
-    (category_id SERIAL PRIMARY KEY, 
+    `CREATE TABLE project_categories 
+    (project_category_id SERIAL PRIMARY KEY, 
     title VARCHAR, 
     description VARCHAR)`
   );
@@ -26,8 +26,16 @@ const createSkills = () => {
   return db.query(
     `CREATE TABLE skills 
     (skill_id SERIAL PRIMARY KEY, 
-    title VARCHAR, 
-    category VARCHAR)`
+    title VARCHAR,
+    category INT REFERENCES skill_categories(skill_category_id) ON DELETE CASCADE NOT NULL)`
+  );
+};
+
+const createSkillsCategories = () => {
+  return db.query(
+    `CREATE TABLE skill_categories 
+    (skill_category_id SERIAL PRIMARY KEY, 
+    title VARCHAR)`
   );
 };
 
@@ -54,14 +62,14 @@ const insertProject = (projects) => {
   );
 };
 
-const insertCategories = (categories) => {
-  const formattedCategories = categories.map((category) => {
+const insertProjectCategories = (projectCategories) => {
+  const formattedCategories = projectCategories.map((category) => {
     return [category.name, category.description];
   });
 
   return db.query(
     format(
-      `INSERT INTO categories
+      `INSERT INTO project_categories
     (title, description)
     VALUES
     %L
@@ -73,7 +81,7 @@ const insertCategories = (categories) => {
 
 const insertSkills = (skills) => {
   const formattedSkills = skills.map((skill) => {
-    return [skill.name, skill.category];
+    return [skill.title, skill.category];
   });
 
   return db.query(
@@ -88,11 +96,30 @@ const insertSkills = (skills) => {
   );
 };
 
+const insertSkillCategories = (skillCategories) => {
+  const formattedCategories = skillCategories.map((category) => {
+    return [category.title];
+  });
+
+  return db.query(
+    format(
+      `INSERT INTO skill_categories
+    (title)
+    VALUES
+    %L
+    RETURNING *`,
+      formattedCategories
+    )
+  );
+};
+
 module.exports = {
   createProjects,
-  createCategories,
+  createProjectCategories,
   createSkills,
+  createSkillsCategories,
   insertProject,
-  insertCategories,
+  insertProjectCategories,
   insertSkills,
+  insertSkillCategories,
 };

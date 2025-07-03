@@ -63,7 +63,7 @@ describe("GET /api/categories", () => {
         .expect(200)
         .then(({ body }) => {
           expect(body.category).toMatchObject({
-            category_id: 1,
+            project_category_id: 1,
             title: "Northcoder",
             description: "Northcoder's final project",
           });
@@ -150,6 +150,70 @@ describe("GET /api/projects", () => {
     test("400: Responds with error msg when given invalid ID", () => {
       return request(app)
         .get("/api/projects/smile")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Bad Request, invalid input");
+        });
+    });
+  });
+});
+
+describe("GET /api/skills", () => {
+  describe("All Skills", () => {
+    test("200: Responds with an array of all skills", () => {
+      return request(app)
+        .get("/api/skills")
+        .expect(200)
+        .then(({ body }) => {
+          expect(Array.isArray(body.skills)).toBe(true);
+        });
+    });
+    test("200: Each category should have a title and category properties", () => {
+      return request(app)
+        .get("/api/skills")
+        .expect(200)
+        .then(({ body }) => {
+          body.skills.forEach((skill) => {
+            expect(skill).toMatchObject({
+              title: expect.any(String),
+              category: expect.any(Number),
+            });
+          });
+        });
+    });
+    xtest("404: Responds with an 404 error message if endpoint is invalid", () => {
+      return request(app)
+        .get("/api/categorie")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Page not found");
+        });
+    });
+  });
+  xdescribe("Skills by Category ID", () => {
+    test("200: Responds with category by given ID", () => {
+      return request(app)
+        .get("/api/categories/1")
+        .expect(200)
+        .then(({ body }) => {
+          expect(body.category).toMatchObject({
+            project_category_id: 1,
+            title: "Northcoder",
+            description: "Northcoder's final project",
+          });
+        });
+    });
+    test("404: Responds with error msg when given ID does not exisit", () => {
+      return request(app)
+        .get("/api/categories/999")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Resource not found");
+        });
+    });
+    test("400: Responds with error msg when given invalid ID", () => {
+      return request(app)
+        .get("/api/categories/smile")
         .expect(400)
         .then(({ body }) => {
           expect(body.msg).toBe("Bad Request, invalid input");

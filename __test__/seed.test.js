@@ -99,7 +99,7 @@ describe("Table Creation", () => {
         });
     });
   });
-  describe("Category Table", () => {
+  describe("Project Category Table", () => {
     test("Exists", () => {
       return db
         .query(
@@ -107,7 +107,7 @@ describe("Table Creation", () => {
         SELECT FROM 
             information_schema.tables
         WHERE
-            table_name = 'categories');`
+            table_name = 'project_categories');`
         )
         .then(({ rows: [{ exists }] }) => {
           expect(exists).toBe(true);
@@ -118,11 +118,11 @@ describe("Table Creation", () => {
         .query(
           `SELECT * 
         FROM information_schema.columns
-        WHERE table_name = 'categories'
-        AND column_name = 'category_id';`
+        WHERE table_name = 'project_categories'
+        AND column_name = 'project_category_id';`
         )
         .then(({ rows: [column] }) => {
-          expect(column.column_name).toBe("category_id");
+          expect(column.column_name).toBe("project_category_id");
           expect(column.data_type).toBe("integer");
         });
     });
@@ -131,7 +131,7 @@ describe("Table Creation", () => {
         .query(
           `SELECT * 
         FROM information_schema.columns
-        WHERE table_name = 'categories'
+        WHERE table_name = 'project_categories'
         AND column_name = 'title';`
         )
         .then(({ rows: [column] }) => {
@@ -144,7 +144,7 @@ describe("Table Creation", () => {
         .query(
           `SELECT * 
         FROM information_schema.columns
-        WHERE table_name = 'categories'
+        WHERE table_name = 'project_categories'
         AND column_name = 'description';`
         )
         .then(({ rows: [column] }) => {
@@ -193,7 +193,7 @@ describe("Table Creation", () => {
           expect(column.data_type).toBe("character varying");
         });
     });
-    test("Description Column", () => {
+    test("Cateogry Column", () => {
       return db
         .query(
           `SELECT * 
@@ -203,6 +203,47 @@ describe("Table Creation", () => {
         )
         .then(({ rows: [column] }) => {
           expect(column.column_name).toBe("category");
+          expect(column.data_type).toBe("integer");
+        });
+    });
+  });
+  describe("Skills Category Table", () => {
+    test("Exists", () => {
+      return db
+        .query(
+          `SELECT EXISTS (
+        SELECT FROM 
+            information_schema.tables
+        WHERE
+            table_name = 'skill_categories');`
+        )
+        .then(({ rows: [{ exists }] }) => {
+          expect(exists).toBe(true);
+        });
+    });
+    test("ID Column", () => {
+      return db
+        .query(
+          `SELECT * 
+        FROM information_schema.columns
+        WHERE table_name = 'skill_categories'
+        AND column_name = 'skill_category_id';`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe("skill_category_id");
+          expect(column.data_type).toBe("integer");
+        });
+    });
+    test("Title Column", () => {
+      return db
+        .query(
+          `SELECT * 
+        FROM information_schema.columns
+        WHERE table_name = 'skill_categories'
+        AND column_name = 'title';`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe("title");
           expect(column.data_type).toBe("character varying");
         });
     });
@@ -223,9 +264,9 @@ describe("Data Insertion", () => {
       });
     });
   });
-  test("Cateogories Data has been inserted correctly", () => {
+  test("Project Cateogories Data has been inserted correctly", () => {
     return db
-      .query(`SELECT * FROM categories;`)
+      .query(`SELECT * FROM project_categories;`)
       .then(({ rows: categories }) => {
         expect(categories).toHaveLength(3);
         categories.forEach((category) => {

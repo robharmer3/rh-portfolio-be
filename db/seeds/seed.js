@@ -1,33 +1,52 @@
 const db = require("../connection");
 const {
   createProjects,
-  createCategories,
-  insertProject,
-  insertCategories,
+  createProjectCategories,
   createSkills,
+  createSkillsCategories,
+  insertProject,
   insertSkills,
+  insertSkillCategories,
+  insertProjectCategories,
 } = require("./utils");
 
-const seed = ({ categoryData, projectData, skillData }) => {
+const seed = ({
+  projectCategoryData,
+  projectData,
+  skillData,
+  skillCategoryData,
+}) => {
   return db
     .query(`DROP TABLE IF EXISTS projects`)
     .then(() => {
-      return db.query(`DROP TABLE IF EXISTS categories`);
+      return db.query(`DROP TABLE IF EXISTS project_categories`);
     })
     .then(() => {
-      return createCategories();
+      return db.query(`DROP TABLE IF EXISTS skills`);
+    })
+    .then(() => {
+      return db.query(`DROP TABLE IF EXISTS skill_categories`);
+    })
+    .then(() => {
+      return createProjectCategories();
     })
     .then(() => {
       return createProjects();
     })
     .then(() => {
+      return createSkillsCategories();
+    })
+    .then(() => {
       return createSkills();
     })
     .then(() => {
-      return insertCategories(categoryData);
+      return insertProjectCategories(projectCategoryData);
     })
     .then(() => {
       return insertProject(projectData);
+    })
+    .then(() => {
+      return insertSkillCategories(skillCategoryData);
     })
     .then(() => {
       return insertSkills(skillData);
