@@ -17,7 +17,6 @@ exports.getCategoryById = (request, response, next) => {
   const { category_id } = request.params;
   fetchCategoryByID(category_id)
     .then((category) => {
-      console.log(category);
       response.status(200).send({ category });
     })
     .catch((error) => {

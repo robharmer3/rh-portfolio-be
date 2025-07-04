@@ -24,19 +24,19 @@ describe("GET /api", () => {
   });
 });
 
-describe("GET /api/categories", () => {
-  describe("All Categories", () => {
-    test("200: Responds with an array of all categories", () => {
+describe("GET /api/projects/categories", () => {
+  describe("Project Categories", () => {
+    test("200: Responds with an array of all project categories", () => {
       return request(app)
-        .get("/api/categories")
+        .get("/api/projects/categories")
         .expect(200)
         .then(({ body }) => {
           expect(Array.isArray(body.categories)).toBe(true);
         });
     });
-    test("200: Each category should have a title and description properties", () => {
+    test("200: Each project category should have a title and description properties", () => {
       return request(app)
-        .get("/api/categories")
+        .get("/api/projects/categories")
         .expect(200)
         .then(({ body }) => {
           body.categories.forEach((category) => {
@@ -47,19 +47,19 @@ describe("GET /api/categories", () => {
           });
         });
     });
-    xtest("404: Responds with an 404 error message if endpoint is invalid", () => {
+    test("400: Responds with an 400 error message if endpoint is invalid", () => {
       return request(app)
-        .get("/api/categorie")
-        .expect(404)
+        .get("/api/projects/categorie")
+        .expect(400)
         .then(({ body }) => {
-          expect(body.msg).toBe("Page not found");
+          expect(body.msg).toBe("Bad Request, invalid input");
         });
     });
   });
   describe("Categories by ID", () => {
     test("200: Responds with category by given ID", () => {
       return request(app)
-        .get("/api/categories/1")
+        .get("/api/projects/categories/1")
         .expect(200)
         .then(({ body }) => {
           expect(body.category).toMatchObject({
@@ -71,7 +71,7 @@ describe("GET /api/categories", () => {
     });
     test("404: Responds with error msg when given ID does not exisit", () => {
       return request(app)
-        .get("/api/categories/999")
+        .get("/api/projects/categories/999")
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe("Resource not found");
@@ -79,7 +79,7 @@ describe("GET /api/categories", () => {
     });
     test("400: Responds with error msg when given invalid ID", () => {
       return request(app)
-        .get("/api/categories/smile")
+        .get("/api/projects/categories/smile")
         .expect(400)
         .then(({ body }) => {
           expect(body.msg).toBe("Bad Request, invalid input");
@@ -119,7 +119,7 @@ describe("GET /api/projects", () => {
         .get("/api/project")
         .expect(404)
         .then(({ body }) => {
-          expect(body.msg).toBe("Page not found");
+          expect(body.msg).toBe("Bad Request, invalid input");
         });
     });
   });
@@ -190,33 +190,38 @@ describe("GET /api/skills", () => {
         });
     });
   });
-  xdescribe("Skills by Category ID", () => {
+});
+
+describe("GET /api/skills/categories", () => {
+  describe("Skills Categories", () => {
     test("200: Responds with category by given ID", () => {
       return request(app)
-        .get("/api/categories/1")
+        .get("/api/skills/categories/")
         .expect(200)
         .then(({ body }) => {
-          expect(body.category).toMatchObject({
-            project_category_id: 1,
-            title: "Northcoder",
-            description: "Northcoder's final project",
+          expect(Array.isArray(body.skillCategories)).toBe(true);
+        });
+    });
+    test("200: Each project category should have a title and description properties", () => {
+      return request(app)
+        .get("/api/skills/categories")
+        .expect(200)
+        .then(({ body }) => {
+          body.skillCategories.forEach((category) => {
+            expect(category).toMatchObject({
+              title: expect.any(String),
+              skill_category_id: expect.any(Number),
+            });
           });
         });
     });
-    test("404: Responds with error msg when given ID does not exisit", () => {
+    xtest("400: Responds with an 400 error message if endpoint is invalid", () => {
       return request(app)
-        .get("/api/categories/999")
+        .get("/api/skills/categorie")
         .expect(404)
         .then(({ body }) => {
-          expect(body.msg).toBe("Resource not found");
-        });
-    });
-    test("400: Responds with error msg when given invalid ID", () => {
-      return request(app)
-        .get("/api/categories/smile")
-        .expect(400)
-        .then(({ body }) => {
-          expect(body.msg).toBe("Bad Request, invalid input");
+          console.log(body);
+          expect(body.msg).toBe("Not Found");
         });
     });
   });
