@@ -3,12 +3,7 @@ module.exports = [
     title: "NC News",
     category: 1,
     description: "Final solo project",
-    avatar_url: [
-      "../screenshots/rhnews/Screenshot from 2025-07-08 15-57-20.png",
-      "../screenshots/rhnews/Screenshot from 2025-07-08 15-57-33.png",
-      "../screenshots/rhnews/Screenshot from 2025-07-08 15-57-53.png",
-      "../screenshots/rhnews/Screenshot from 2025-07-08 15-57-57.png",
-    ],
+    avatar_url: "INSERT SCREENSHOT HERE",
   },
   {
     title: "2Gather",
