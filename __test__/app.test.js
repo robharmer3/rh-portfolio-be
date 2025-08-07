@@ -135,7 +135,8 @@ describe("GET /api/projects", () => {
             category: 1,
             description: "Final group project",
             link: "INSERT LINK HERE",
-            avatar_url: "INSERT SCREENSHOT HERE",
+            avatar_url:
+              "https://photos.google.com/search/Cg5SZWNlbnRseSBhZGRlZCIIEgYKBHICCgAo6o+0r4gz/photo/AF1QipMX3F40ICIr-qo5JHlklFWF2RHoj61pwG8OErwO",
           });
         });
     });

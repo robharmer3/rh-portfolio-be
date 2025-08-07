@@ -9,7 +9,7 @@ const createProjects = () => {
         description VARCHAR,
         category INT REFERENCES project_categories(project_category_id) ON DELETE CASCADE NOT NULL,
         link VARCHAR,
-        avatar_url VARCHAR(1000))`
+        avatar_url VARCHAR)`
   );
 };
 

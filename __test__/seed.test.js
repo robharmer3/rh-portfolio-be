@@ -253,7 +253,7 @@ describe("Table Creation", () => {
 describe("Data Insertion", () => {
   test("Project Data has been inserted correctly", () => {
     return db.query(`SELECT * FROM projects;`).then(({ rows: projects }) => {
-      expect(projects).toHaveLength(5);
+      expect(projects).toHaveLength(4);
       projects.forEach((project) => {
         expect(project).toHaveProperty("project_id");
         expect(project).toHaveProperty("title");
