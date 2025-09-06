@@ -5,7 +5,7 @@ module.exports = [
     description: "Final solo project",
     link: "INSERT LINK HERE",
     avatar_url:
-      "https://photos.google.com/search/Cg5SZWNlbnRseSBhZGRlZCIIEgYKBHICCgAo6o+0r4gz/photo/AF1QipOAVmCfCBHLpZWFcY_4Dn0BEZ-ymO3O-QRX7xvW",
+      "/home/rob-harmer/Coding/portfoilo-site/rh-portfolio-be/db/assets/NC-NEWS-1.png",
   },
   {
     title: "2Gather",
@@ -13,7 +13,7 @@ module.exports = [
     description: "Final group project",
     link: "INSERT LINK HERE",
     avatar_url:
-      "https://photos.google.com/search/Cg5SZWNlbnRseSBhZGRlZCIIEgYKBHICCgAo6o+0r4gz/photo/AF1QipMX3F40ICIr-qo5JHlklFWF2RHoj61pwG8OErwO",
+      "/home/rob-harmer/Coding/portfoilo-site/rh-portfolio-be/db/assets/2GATHER-1.png",
   },
   {
     title: "Portfolio",
@@ -21,7 +21,7 @@ module.exports = [
     description: "This portfolio project",
     link: "INSERT LINK HERE",
     avatar_url:
-      "https://photos.google.com/search/Cg5SZWNlbnRseSBhZGRlZCIIEgYKBHICCgAo6o+0r4gz/photo/AF1QipPjdBdaOsPuG8rtX0kwgslpk-Enxmifo-10PFb-",
+      "/home/rob-harmer/Coding/portfoilo-site/rh-portfolio-be/db/assets/PORT-1.png",
   },
   // {
   //   title: "Top-Trumps",
@@ -36,6 +36,6 @@ module.exports = [
     description: "First tech test",
     link: "INSERT LINK HERE",
     avatar_url:
-      "https://photos.google.com/search/Cg5SZWNlbnRseSBhZGRlZCIIEgYKBHICCgAo6o+0r4gz/photo/AF1QipNoqTL_Ij1zpyNqJy9_i4HU8Zcy-7d8j1FSpdtA",
+      "/home/rob-harmer/Coding/portfoilo-site/rh-portfolio-be/db/assets/VERTICODE-1.png",
   },
 ];
